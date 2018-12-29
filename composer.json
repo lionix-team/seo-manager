@@ -1,0 +1,39 @@
+{
+    "name": "lionix/seo-manager",
+    "description": "SEO Manager for Laravel Framework",
+    "keywords": ["laravel", "seo", "seo-manager", "lionix"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lionix Team",
+            "email": "packages@lionix-team.com"
+        },
+        {
+            "name": "Sergey Karakhanyan",
+            "email": "karakhanyansa@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lionix\\SeoManager\\SeoManagerServiceProvider"
+            ],
+            "aliases": {
+                "SeoManager": "Lionix\\SeoManager\\Facades\\SeoManager"
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Lionix\\SeoManager\\": "src"
+        },
+        "files":[
+            "src/helpers/helpers.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "require": {
+
+    }
+}
