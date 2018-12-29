@@ -1,37 +1,52 @@
 <?php
 
 return [
-    // Specify database configs
+    /**
+     * Database table name where your manager data will be stored
+     */
     'database' => [
         'table' => 'seo_manager'
     ],
 
-    // specify the path where your eloquent models are
+    /**
+     * Path where your eloquent models are
+     */
     'models_path' => '',
 
-    // route for seo-manager dashboard
+    /**
+     * Route from which your Dashboard will be available
+     */
     'route' => 'seo-manager',
 
-    // you can define middleware here
-    // to prevent unauthorized users visit the manager
+    /**
+     * Middleware array for dashboard
+     * to prevent unauthorized users visit the manager
+     */
     'middleware' => [
-//        'auth',
+        //  'auth',
     ],
 
-    // specify the routes
-    // which shouldn't be imported to seo manager
+    /**
+     * Routes which shouldn't be imported to seo manager
+     */
     'except_routes' => [
         'seo-manager',
         'admin'
         //
     ],
-    // specify columns which shouldn't be used
+
+    /**
+     * Columns which shouldn't be used ( in mapping )
+     */
     'except_columns' => [
-//        "created_at",
-//        "updated_at",
+        // "created_at",
+        // "updated_at",
     ],
-    // set this parameter to true
-    // if you want to have "$metaData" variable
-    // shared between all views in "web" middleware group
+
+    /**
+     * Set this parameter to true
+     * if you want to have "$metaData" variable
+     * shared between all views in "web" middleware group
+     */
     'shared_meta_data' => false
 ];

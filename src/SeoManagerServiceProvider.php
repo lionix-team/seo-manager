@@ -88,28 +88,27 @@ class SeoManagerServiceProvider extends ServiceProvider
             return $meta;
         });
         Blade::directive('keywords', function () {
-            return metaKeywords();
-        });
-        Blade::directive('title', function () {
-            return metaTitle();
+            return "<meta property='keywords' content='".metaKeywords()."'/>";
         });
         Blade::directive('url', function () {
-            return metaUrl();
+            return "<meta property='url' content='".metaUrl()."'/>";
         });
         Blade::directive('author', function () {
-            return metaAuthor();
+            return "<meta property='author' content='".metaAuthor()."'/>";
         });
         Blade::directive('description', function () {
-            return metaDescription();
+            return "<meta property='description' content='".metaDescription()."'/>";
         });
-        Blade::directive('titleDynamic', function () {
-            return metaTitleDynamic();
+        Blade::directive('title', function () {
+            return "<meta property='title' content='".metaTitle()."'/>";
         });
         Blade::directive('openGraph', function ($expression) {
             $expression = trim($expression, '\"\'');
             return metaOpenGraph($expression);
         });
-
+        Blade::directive('titleDynamic', function () {
+            return metaTitleDynamic();
+        });
     }
 
 }
