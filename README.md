@@ -130,7 +130,7 @@ Here you can write your open graph data or map your fields to mapping based on p
 
 ## Examples
 
-###Via `SeoManager` Facade
+### Via `SeoManager` Facade
 
 ```php
 use Lionix\SeoManager\Facades\SeoManager;
