@@ -2,7 +2,7 @@
 
 `lionix/seo-manager` package will provide 
 you an interface from where you can manage all your pages
-meta data separately and get dynamically changing content.
+metadata separately and get dynamically changing content.
 Let's see how.
 
 ## Installation
@@ -20,7 +20,7 @@ file and will copy package assets directory to `public/vendor/lionix`.
 
 #### Configurations
 
-In `config/seo-manager.php` file you can do following configurations:
+In `config/seo-manager.php` file you can do the following configurations:
 
 ```php
 return [
@@ -75,19 +75,19 @@ return [
 ];
 ```
 
-After finishing with all configurations run `php artisan migrate` to create seo manager table.
+After finishing with all configurations run `php artisan migrate` to create SEO manager table.
 
-That's it, now your seo manager will be available 
-from /seo-manager url (or,if you changed route config, 
-by that config url) 
+That's it, now your SEO manager will be available 
+from /seo-manager URL (or, if you changed route config, 
+by that config URL) 
 
 ## Usage
 
-After visiting your dashboard url you have to import your routes to start manage them.
+After visiting your dashboard URL you have to import your routes to start to manage them.
 
 ![routes import](https://lh6.googleusercontent.com/YSbFt8jvV6swodjBE4xi6UCP0h6sNxw01kEhg7YueMnsuIQxmeWoEjBagiY=w2400)
 
-Route importing will store all your GET routes into database ( except the ones which specified in "except_routes" configs).
+Route importing will store all your GET routes into the database ( except the ones which specified in "except_routes" configs).
 
 ![imported routes](https://lh5.googleusercontent.com/Dn-tuphYqMN9bmN_WzcWmTgOCzuzg3m3_TcWlzbb7Nf7zbVHrHTBkXc4O4E=w2400)
 
@@ -97,13 +97,13 @@ Route importing will store all your GET routes into database ( except the ones w
 
 ![](https://lh4.googleusercontent.com/fxvoOPQUG9GNiOqAj6C2z7_ZolMMJSV-53M_Q6sPqt3fp1TdYp-9blL3DQ8=w2400)
 
-To get dynamically changing meta data you should map your route params to the correct Models.
+To get dynamically changing metadata you should map your route params to the correct Models.
 
 *Param: Route param*
 
-*Model: Eloquent Model which you are using to get record by route param*
+*Model: Eloquent Model which you are using to get the record by route param*
 
-*Find By: Database table column name which you are using to get record by route param*
+*Find By: Database table column name which you are using to get the record by route param*
 
 *Use Columns: Database table columns which we should use for further mapping*
 
@@ -117,8 +117,8 @@ Next steps you can do, is to set Keywords, Description, Title, URL, Author, Titl
 
 **About "Title Dynamic":**
 
-Here you can drag & drop your mapped params, your title and write custom text to generate dynamic title for your page.
-Every time your "title" will be changed or your mapped params value changed, dynamic title will be changed automatically.
+Here you can drag & drop your mapped params, your title and write custom text to generate the dynamic title for your page.
+Every time your "title" will be changed or your mapped params value changed, the dynamic title will be changed automatically.
 
 ![](https://lh3.googleusercontent.com/VgalM88QnjH8iB9-bEc2iike_14Lb_cF7JEyilBwqBTuuDOfoeJvR-n655M=w2400)
 
@@ -130,7 +130,7 @@ Here you can write your open graph data or map your fields to mapping based on p
 
 ## Examples
 
-### Via `SeoManager` Facade
+## Via `SeoManager` Facade
 
 ```php
 use Lionix\SeoManager\Facades\SeoManager;
@@ -206,7 +206,7 @@ Will return
 `"https://wallpaperbrowse.com/media/images/3848765-wallpaper-images-download.jpg"`
 
 
-### Via `helper` functions
+## Via `helper` functions
 
 `metaData()`
 
@@ -224,9 +224,9 @@ Will return
 
 `metaOpenGraph()`
 
-### Via @Blade directives
+## Via @Blade directives
 
-You can use this blade directives in your view files to get meta data. 
+You can use this blade directives in your view files to get metadata. 
 
 `@meta`
 
