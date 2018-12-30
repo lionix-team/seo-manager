@@ -104,7 +104,16 @@ class SeoManagerServiceProvider extends ServiceProvider
         });
         Blade::directive('openGraph', function ($expression) {
             $expression = trim($expression, '\"\'');
-            return metaOpenGraph($expression);
+            $meta = '';
+            $metaOpenGraph = metaOpenGraph($expression);
+            if (is_array($metaOpenGraph)) {
+                foreach ($metaOpenGraph as $key => $og) {
+                    $meta .= "<meta property='{$key}' content='{$og}'/>";
+                }
+            } else {
+                $meta .= "<meta property='{$expression}' content='{$metaOpenGraph}'/>";
+            }
+            return $meta;
         });
         Blade::directive('titleDynamic', function () {
             return metaTitleDynamic();

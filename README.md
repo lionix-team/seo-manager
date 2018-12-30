@@ -108,5 +108,183 @@ To get dynamically changing meta data you should map your route params to the co
 *Use Columns: Database table columns which we should use for further mapping*
 
 
+> **Note**: If you have appended attributes inside your model via `protected $appends` and you want to use them in mapping
+you have to use `Lionix\SeoManager\Traits\Appends;` trait inside your model.
+
+*Mapping available only if your route has params*
+
+Next steps you can do, is to set Keywords, Description, Title, URL, Author, Title Dynamic, OpenGraph Data.
+
+**About "Title Dynamic":**
+
+![](https://lh3.googleusercontent.com/VgalM88QnjH8iB9-bEc2iike_14Lb_cF7JEyilBwqBTuuDOfoeJvR-n655M=w2400)
+
+Here you can drag & drop your mapped params, your title and write custom text to generate dynamic title for your page.
+Every time your "title" will be changed or your mapped params value changed, dynamic title will be changed automatically.
+
+**About "Open Graph":**
+
+![](https://lh6.googleusercontent.com/Z93-NUUKLFOleZbj4oYwfE59MMyGxhu9SHxE-0iAKNwatWHm9w5LfZ_h5rg=w2400)
+
+Here you can write your open graph data or map your fields to mapping based on params.
+
+## Examples
+
+***Via `SeoManager` Facade**
+
+```php
+use Lionix\SeoManager\Facades\SeoManager;
+```
+##### This will return an array will all your seo data
+```
+SeoManager::metaData();
+```
+*Example:*
+```php
+array:13 [▼
+  "keywords" => "First Keyword, Second, Third"
+  "description" => "Test Description"
+  "title" => "Test Titile"
+  "url" => "http://example.com/users/1"
+  "author" => "Sergey Karakhanyan"
+  "title_dynamic" => "Test Titile - Custom Text - Test User Name "
+  "og:url" => "http://example.com/users/1"
+  "og:type" => "website"
+  "og:image:url" => "https://wallpaperbrowse.com/media/images/3848765-wallpaper-images-download.jpg"
+  "og:title" => "Test Titile - Custom Open Graph Text"
+  "og:locale" => "en_GB"
+  "og:site_name" => "Seo Manager Package"
+  "og:description" => "Open Graph Description"
+]
+```
+
+`SeoManager::metaData();` method can receive property variable 
+to get value of some property 
+
+*Example:*
+
+`SeoManager::metaData('keywords');` will return  `"First Keyword, Second, Third"`
+
+
+#####To get only OpenGraph data array: 
+```php
+SeoManager::metaData('og_data');
+```
+*Example*
+
+```php
+array:7 [▼
+  "og:url" => "http://example.com/users/1"
+  "og:type" => "website"
+  "og:image:url" => "https://wallpaperbrowse.com/media/images/3848765-wallpaper-images-download.jpg"
+  "og:title" => "Test Titile - Custom Open Graph Text"
+  "og:locale" => "en_GB"
+  "og:site_name" => "Seo Manager Package"
+  "og:description" => "Open Graph Description"
+]
+```
+##### Aliases
+`SeoManager::metaKeywords()`
+
+`SeoManager::metaTitle()`
+
+`SeoManager::metaDescription()`
+
+`SeoManager::metaUrl()`
+
+`SeoManager::metaAuthor()`
+
+`SeoManager::metaTitleDynamic()`
+
+`SeoManager::metaOpenGraph()` - Can receive property variable to get value of some OG property
+
+*Example*
+
+`SeoManager::metaOpenGraph('og:image:url)`
+
+Will return
+`"https://wallpaperbrowse.com/media/images/3848765-wallpaper-images-download.jpg"`
+
+
+***Via `helper` functions**
+
+`metaData()`
+
+`metaKeywords()`
+
+`metaTitle()`
+
+`metaDescription()`
+
+`metaUrl()`
+
+`metaAuthor()`
+
+`metaTitleDynamic()`
+
+`metaOpenGraph()`
+
+***Via @Blade directives**
+You can use this blade directives in your view files to get meta data. 
+
+`@meta`
+
+*Output Example*
+
+```html
+<meta property="keywords" content="First Keyword, Second, Third">
+<meta property="description" content="Test Description">
+<meta property="title" content="Test Titile">
+<meta property="url" content="http://packages.loc/users/1">
+<meta property="author" content="Sergey Karakhanyan">
+<meta property="title_dynamic" content="Test Titile - Custom Text - Test User Name ">
+<meta property="og:url" content="http://packages.loc/users/1">
+<meta property="og:type" content="website">
+<meta property="og:image:url" content="https://wallpaperbrowse.com/media/images/3848765-wallpaper-images-download.jpg">
+<meta property="og:title" content="Test Titile - Custom Open Graph Text">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Seo Manager Package">
+<meta property="og:description" content="Open Graph Description">
+```
+
+`@meta` can receive property param
+
+`@meta('description')`
+
+*Output Example*
+
+```html
+<meta property="description" content="Test Description">
+```
+>**Note:**
+You can't add open graph properties to `@meta()` like `@meta('og:url')`
+But you can get only OpenGraph meta data by `@meta('og_data')`.
+If you want to get concrete OG param meta tag you can use `@openGraph` (*similar to `@meta('og_data')`*)
+and pass param there like `@openGraph('og:url)`
+
+>**Note #2:** If you want to do modifications in your og data and display it manually, you should do that before `@meta`
+
+*Example:*
+```html
+<meta property="og:image:url" content="{{ asset(metaOpenGraph('og:image:url')) }}">
+@meta
+```
+##### Aliases
+
+`@keywords`
+
+`@url`
+
+`@author`
+
+`@description`
+
+`@title`
+
+`@openGraph`
+
+`@titleDynamic` - will return dynamically generated title which you can use inside your `<title></title>` tags.
+
+
 
 
