@@ -128,14 +128,14 @@ Here you can write your open graph data or map your fields to mapping based on p
 
 ![](https://lh6.googleusercontent.com/Z93-NUUKLFOleZbj4oYwfE59MMyGxhu9SHxE-0iAKNwatWHm9w5LfZ_h5rg=w2400)
 
-## Examples
+## Example Usage
 
 ## Via `SeoManager` Facade
 
 ```php
 use Lionix\SeoManager\Facades\SeoManager;
 ```
-##### This will return an array will all your seo data
+##### This will return an array with all your SEO Manager data
 ```
 SeoManager::metaData();
 ```
@@ -159,7 +159,7 @@ array:13 [▼
 ```
 
 `SeoManager::metaData();` method can receive property variable 
-to get value of some property 
+to get the value of some property 
 
 *Example:*
 
@@ -196,7 +196,7 @@ array:7 [▼
 
 `SeoManager::metaTitleDynamic()`
 
-`SeoManager::metaOpenGraph()` - Can receive property variable to get value of some OG property
+`SeoManager::metaOpenGraph()` - Can receive property variable to get the value of some OG property
 
 *Example*
 
