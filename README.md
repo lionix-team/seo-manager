@@ -288,4 +288,9 @@ and pass param there like `@openGraph('og:url)`
 
 
 
+## Credits
+
+- [Sergey Karakhanyan](https://github.com/karakhanyans)
+- [Lionix Team](https://github.com/lionix-team)
+
 
