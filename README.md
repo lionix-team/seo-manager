@@ -117,20 +117,20 @@ Next steps you can do, is to set Keywords, Description, Title, URL, Author, Titl
 
 **About "Title Dynamic":**
 
-![](https://lh3.googleusercontent.com/VgalM88QnjH8iB9-bEc2iike_14Lb_cF7JEyilBwqBTuuDOfoeJvR-n655M=w2400)
-
 Here you can drag & drop your mapped params, your title and write custom text to generate dynamic title for your page.
 Every time your "title" will be changed or your mapped params value changed, dynamic title will be changed automatically.
 
-**About "Open Graph":**
+![](https://lh3.googleusercontent.com/VgalM88QnjH8iB9-bEc2iike_14Lb_cF7JEyilBwqBTuuDOfoeJvR-n655M=w2400)
 
-![](https://lh6.googleusercontent.com/Z93-NUUKLFOleZbj4oYwfE59MMyGxhu9SHxE-0iAKNwatWHm9w5LfZ_h5rg=w2400)
+**About "Open Graph":**
 
 Here you can write your open graph data or map your fields to mapping based on params.
 
+![](https://lh6.googleusercontent.com/Z93-NUUKLFOleZbj4oYwfE59MMyGxhu9SHxE-0iAKNwatWHm9w5LfZ_h5rg=w2400)
+
 ## Examples
 
-***Via `SeoManager` Facade**
+###Via `SeoManager` Facade
 
 ```php
 use Lionix\SeoManager\Facades\SeoManager;
@@ -166,7 +166,7 @@ to get value of some property
 `SeoManager::metaData('keywords');` will return  `"First Keyword, Second, Third"`
 
 
-#####To get only OpenGraph data array: 
+##### To get only OpenGraph data array: 
 ```php
 SeoManager::metaData('og_data');
 ```
@@ -206,7 +206,7 @@ Will return
 `"https://wallpaperbrowse.com/media/images/3848765-wallpaper-images-download.jpg"`
 
 
-***Via `helper` functions**
+### Via `helper` functions
 
 `metaData()`
 
@@ -224,7 +224,8 @@ Will return
 
 `metaOpenGraph()`
 
-***Via @Blade directives**
+### Via @Blade directives
+
 You can use this blade directives in your view files to get meta data. 
 
 `@meta`
