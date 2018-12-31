@@ -1,6 +1,6 @@
 # Seo Manager Package for Laravel
 
-![](https://lh3.googleusercontent.com/UoSZW_eF7Gi6-UUF-Y8cn4tqByC5OGK4TQfb9pIOqiPGFHC5q2wmxG8D1WU=w2400)
+![](https://lh3.googleusercontent.com/UoSZW_eF7Gi6-UUF-Y8cn4tqByC5OGK4TQfb9pIOqiPGFHC5q2wmxG8D1WU=w300)
 
 
 `lionix/seo-manager` package will provide 
