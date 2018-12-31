@@ -1,5 +1,8 @@
 # Seo Manager Package for Laravel
 
+![](https://lh3.googleusercontent.com/UoSZW_eF7Gi6-UUF-Y8cn4tqByC5OGK4TQfb9pIOqiPGFHC5q2wmxG8D1WU=w2400)
+
+
 `lionix/seo-manager` package will provide 
 you an interface from where you can manage all your pages
 metadata separately and get dynamically changing content.
