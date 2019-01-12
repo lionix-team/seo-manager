@@ -102,8 +102,8 @@ trait SeoManagerTrait
     }
 
     /**
-     * Get project all models list
      * @return array
+     * @throws \ReflectionException
      */
     private function getAllModels()
     {
@@ -113,14 +113,16 @@ trait SeoManagerTrait
         $cleanModelNames = [];
         foreach ($models as $model) {
             $modelPath = $this->cleanFilePath($model);
-            if((new $modelPath) instanceof \Illuminate\Database\Eloquent\Model){
-                $cleanModel = [
-                    'path' => $modelPath,
-                    'name' => str_replace('.php', '', $model->getFilename())
-                ];
-                array_push($cleanModelNames, $cleanModel);
+            $reflectionClass =(new \ReflectionClass($modelPath))->getParentClass();
+            if($reflectionClass !== false){
+                if($reflectionClass->getName() === "Illuminate\Database\Eloquent\Model" || $reflectionClass->getName() === "Illuminate\Foundation\Auth\User"){
+                    $cleanModel = [
+                        'path' => $modelPath,
+                        'name' => str_replace('.php', '', $model->getFilename())
+                    ];
+                    array_push($cleanModelNames, $cleanModel);
+                }
             }
-
         }
         return $cleanModelNames;
     }
