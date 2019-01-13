@@ -11,7 +11,7 @@
         <app-title :title="route.title" :editing="editing"></app-title>
         <app-url :url="route.url" :editing="editing"></app-url>
         <app-author :author="route.author" :editing="editing"></app-author>
-        <app-title-dynamic :route="route" :editing="editing"></app-title-dynamic>
+        <app-title-dynamic :route="route" :editing="editing" :locale="locale"></app-title-dynamic>
         <app-og-data :route="route" :editing="editing"></app-og-data>
         <app-actions :route="route" @end-editing="endEditing" @start-editing="startEditing"
                      :editing="editing"></app-actions>
@@ -36,6 +36,9 @@
             route: {
                 type: Object,
                 required: true
+            },
+            locale:{
+                type:String
             }
         },
         components: {

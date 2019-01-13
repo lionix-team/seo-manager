@@ -1,7 +1,9 @@
 <template>
     <td>
         <button v-if="editing && route.mapping" class="btn btn-info" @click="openModal">Set Dynamic Title</button>
-        <button v-else-if="editing && route.params.length" class="btn btn-danger" @click="openMappingModal">Set Mapping</button>
+        <button v-else-if="editing && route.params.length" class="btn btn-danger" @click="openMappingModal">Set
+            Mapping
+        </button>
         <p v-else class="data">
             <span v-if="example_title">{{ example_title }}</span>
             <span v-else>-</span>
@@ -15,35 +17,38 @@
     export default {
         name: "TitleFormat",
         props: {
-            editing:{
+            editing: {
                 type: Boolean
             },
             route: {
                 type: Object
+            },
+            locale: {
+                type: String
             }
         },
-        data(){
+        data() {
             return {
                 example_title: ''
             }
         },
-        created(){
+        created() {
             let that = this;
             this.getExampleTitle();
-            EventBus.$on('title-changed', function(){
+            EventBus.$on('title-changed', function () {
                 that.getExampleTitle();
             })
         },
-        methods:{
-            openModal(){
+        methods: {
+            openModal() {
                 EventBus.$emit('open-modal', 'title_dynamic')
             },
-            openMappingModal(){
+            openMappingModal() {
                 EventBus.$emit('open-modal', 'mapping')
             },
             getExampleTitle() {
-                if(this.route.title_dynamic !== null && this.route.title_dynamic.length > 0){
-                    this.$http.post(API_URL + '/get-example-title', this.route).then(response => {
+                if (this.route.title_dynamic !== null && this.route.title_dynamic.length > 0) {
+                    this.$http.post(API_URL + '/get-example-title?locale=' + this.locale, this.route).then(response => {
                         this.example_title = response.data.example_title;
                     })
                 }

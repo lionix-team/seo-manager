@@ -5,7 +5,7 @@ import MultiSelect from 'vue-multiselect'
 import VueDraggable from 'vue-draggable'
 import ClickOutside from 'vue-click-outside'
 import VueSweetalert2 from 'vue-sweetalert2'
-
+import {store} from './store/store'
 Vue.use(VueDraggable);
 Vue.use(VueResource);
 Vue.use(VueSweetalert2);
@@ -20,6 +20,7 @@ Vue.component('multi-select', MultiSelect);
 
 new Vue({
     el: '#lionix-seo-manager-app',
+    store,
     components: {
         App
     }

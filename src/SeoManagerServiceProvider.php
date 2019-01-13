@@ -21,9 +21,11 @@ class SeoManagerServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/config/seo-manager.php' => config_path('seo-manager.php'),
-            __DIR__ . '/assets' => public_path('vendor/lionix'),
+        ], 'config');
 
-        ]);
+        $this->publishes([
+            __DIR__ . '/assets' => public_path('vendor/lionix'),
+        ], 'assets');
 
         $this->commands([
             GenerateSeoManagerData::class
@@ -88,19 +90,19 @@ class SeoManagerServiceProvider extends ServiceProvider
             return $meta;
         });
         Blade::directive('keywords', function () {
-            return "<meta property='keywords' content='".metaKeywords()."'/>";
+            return "<meta property='keywords' content='" . metaKeywords() . "'/>";
         });
         Blade::directive('url', function () {
-            return "<meta property='url' content='".metaUrl()."'/>";
+            return "<meta property='url' content='" . metaUrl() . "'/>";
         });
         Blade::directive('author', function () {
-            return "<meta property='author' content='".metaAuthor()."'/>";
+            return "<meta property='author' content='" . metaAuthor() . "'/>";
         });
         Blade::directive('description', function () {
-            return "<meta property='description' content='".metaDescription()."'/>";
+            return "<meta property='description' content='" . metaDescription() . "'/>";
         });
         Blade::directive('title', function () {
-            return "<meta property='title' content='".metaTitle()."'/>";
+            return "<meta property='title' content='" . metaTitle() . "'/>";
         });
         Blade::directive('openGraph', function ($expression) {
             $expression = trim($expression, '\"\'');

@@ -129,6 +129,9 @@
             },
             showModal: {
                 type: Boolean
+            },
+            locale: {
+                type: String
             }
         },
         components: {
@@ -395,7 +398,7 @@
             },
             save() {
                 this.saving = true;
-                this.$http.post(API_URL + '/store-data', {
+                this.$http.post(API_URL + '/store-data?locale='+this.locale, {
                     id: this.route.id,
                     type: 'og_data',
                     og_data: this.ogData

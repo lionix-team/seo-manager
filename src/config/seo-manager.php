@@ -5,11 +5,21 @@ return [
      * Database table name where your manager data will be stored
      */
     'database' => [
-        'table' => 'seo_manager'
+        'table' => 'seo_manager',
+        'locales_table' => 'seo_manager_locales',
+        'translates_table' => 'seo_manager_translates'
     ],
 
     /**
+     * Set default locale,
+     * It will be added as default locale
+     * when locales table migrated
+     */
+    'locale' => 'en',
+
+    /**
      * Path where your eloquent models are
+     * Leave this config empty if you want to look for models in whole project
      */
     'models_path' => '',
 

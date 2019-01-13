@@ -52,6 +52,9 @@
             },
             showModal: {
                 type: Boolean
+            },
+            locale: {
+                type: String
             }
         },
         data(){
@@ -68,7 +71,7 @@
             },
             storeKeywords() {
                 this.saving = true;
-                this.$http.post(API_URL + '/store-data', {
+                this.$http.post(API_URL + '/store-data?locale='+this.locale, {
                     id: this.route.id,
                     type: 'keywords',
                     keywords: this.route.keywords

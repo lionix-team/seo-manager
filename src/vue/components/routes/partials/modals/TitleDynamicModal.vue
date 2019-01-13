@@ -104,6 +104,9 @@
             },
             showModal: {
                 type: Boolean
+            },
+            locale: {
+                type: String
             }
         },
         data() {
@@ -143,13 +146,13 @@
                 this.getExampleTitle();
             },
             getExampleTitle() {
-                this.$http.post(API_URL + '/get-example-title', this.route).then(response => {
+                this.$http.post(API_URL + '/get-example-title?locale=' + this.locale, this.route).then(response => {
                     this.example_title = response.data.example_title;
                 })
             },
             storeTitleDynamic() {
                 this.saving = true;
-                this.$http.post(API_URL + '/store-data', {
+                this.$http.post(API_URL + '/store-data?locale='+this.locale, {
                     id: this.route.id,
                     type: 'title_dynamic',
                     title_dynamic: this.route.title_dynamic

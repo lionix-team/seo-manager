@@ -51,9 +51,7 @@
                     preConfirm: () => {
                         EventBus.$emit('delete-route', this.route);
                     }
-                 }).then(() => {
-
-                })
+                 });
             }
         }
     }

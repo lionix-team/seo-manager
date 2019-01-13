@@ -4,14 +4,25 @@ namespace Lionix\SeoManager;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Schema;
 use Lionix\SeoManager\Models\SeoManager;
+use Lionix\SeoManager\Models\Translate;
 use Lionix\SeoManager\Traits\SeoManagerTrait;
 
 class ManagerController extends Controller
 {
     use SeoManagerTrait;
 
+    protected $locale;
+
+    public function __construct()
+    {
+        if(Input::get('locale')){
+            app()->setLocale(Input::get('locale'));
+            $this->locale = app()->getLocale();
+        }
+}
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -71,8 +82,19 @@ class ManagerController extends Controller
             $seoManager = SeoManager::find($id);
             if (in_array($type, $allowedColumns)) {
                 $data = $request->get($type);
-                $seoManager->$type = $data;
-                $seoManager->save();
+                if($type != 'mapping' && $this->locale !== config('seo-manager.locale')){
+                    $translate = $seoManager->translation()->where('locale', $this->locale)->first();
+                    if(!$translate){
+                        $newInst = new Translate();
+                        $newInst->locale = $this->locale;
+                        $translate = $seoManager->translation()->save($newInst);
+                    }
+                    $translate->$type = $data;
+                    $translate->save();
+                }else{
+                    $seoManager->$type = $data;
+                    $seoManager->save();
+                }
             }
             return response()->json([$type => $seoManager->$type]);
         } catch (\Exception $exception) {

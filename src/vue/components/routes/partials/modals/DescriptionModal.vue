@@ -49,6 +49,9 @@
             },
             showModal: {
                 type: Boolean
+            },
+            locale: {
+                type: String
             }
         },
         data() {
@@ -62,7 +65,7 @@
             },
             storeDescription() {
                 this.saving = true;
-                this.$http.post(API_URL + '/store-data', {
+                this.$http.post(API_URL + '/store-data?locale='+this.locale, {
                     id: this.route.id,
                     type: 'description',
                     description: this.route.description

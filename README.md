@@ -8,6 +8,29 @@ you an interface from where you can manage all your pages
 metadata separately and get dynamically changing content.
 Let's see how.
 
+# Update:
+After updating to version > v1.2.* you have to run:
+```bash
+php artisan vendor:publish --provider="Lionix\SeoManager\SeoManagerServiceProvider" --tag=config --force
+```
+```bash
+php artisan vendor:publish --provider="Lionix\SeoManager\SeoManagerServiceProvider" --tag=assets --force
+```
+and
+```bash
+php artisan migrate
+```
+to publish latest configs and new migration files.
+
+## Localization
+In version v1.2.* you will have availability for localization your metadata and set translates for your data.
+
+For that you just should add your available locales from top right button "Add Locales" and chose locale for which you want to add translations.
+
+That's it, 
+Package will automatically detect your locale from website and will set needed translations, you don't need to do some other configs. 
+Easy, isn't it?
+
 ## Installation
 You can install the package via composer:
 
