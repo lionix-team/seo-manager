@@ -119,13 +119,15 @@
                 showOgDataModal: false,
                 showUrlModal: false,
                 importing: false,
-                loaded: false
+                loaded: false,
+                locale: ''
             }
         },
         created() {
             let that = this;
             EventBus.$on('change-locale', function (locale) {
                 that.getRoutes(locale);
+                that.locale = locale;
             });
             this.syncRoutes();
             this.startEditing();
@@ -133,11 +135,6 @@
             this.openModal();
             this.closeModal();
             this.deleteRoute();
-        },
-        computed: {
-            locale() {
-                return (localStorage.getItem('locale')) ? localStorage.getItem('locale') : 'en';
-            }
         },
         methods: {
             importRoutes() {

@@ -1,4 +1,4 @@
-# Seo Manager Package for Laravel
+# Seo Manager Package for Laravel ( with Localization )
 
 [![MadeWithLaravel.com shield](https://madewithlaravel.com/storage/repo-shields/1138-shield.svg)](https://madewithlaravel.com/p/seo-manager/shield-link)
 
