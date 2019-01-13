@@ -34,10 +34,13 @@
         },
         created() {
             let that = this;
-            this.getExampleTitle();
+            this.getExampleTitle(this.locale);
             EventBus.$on('title-changed', function () {
                 that.getExampleTitle();
-            })
+            });
+            EventBus.$on('change-locale', function (locale) {
+                that.getExampleTitle(locale);
+            });
         },
         methods: {
             openModal() {
@@ -46,9 +49,9 @@
             openMappingModal() {
                 EventBus.$emit('open-modal', 'mapping')
             },
-            getExampleTitle() {
+            getExampleTitle(locale) {
                 if (this.route.title_dynamic !== null && this.route.title_dynamic.length > 0) {
-                    this.$http.post(API_URL + '/get-example-title?locale=' + this.locale, this.route).then(response => {
+                    this.$http.post(API_URL + '/get-example-title?locale=' + locale, this.route).then(response => {
                         this.example_title = response.data.example_title;
                     })
                 }
