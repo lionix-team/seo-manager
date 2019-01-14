@@ -23,12 +23,19 @@ php artisan migrate
 to publish latest configs and new migration files.
 
 ## Localization
-In version v1.2.* you will have availability for localization your metadata and set translates for your data.
+In version v1.2.* you will have availability 
+to localize your metadata and set translates 
+to your data.
 
-For that you just should add your available locales from top right button "Add Locales" and chose locale for which you want to add translations.
+For that, you just should 
+add your available locales 
+with top right button "Add Locales" and 
+chose locale for which you want to add translations.
 
 That's it, 
-Package will automatically detect your locale from website and will set needed translations, you don't need to do some other configs. 
+Package will automatically detect your locale 
+from website and will set needed translations, 
+you don't need to do any other configs. 
 Easy, isn't it?
 
 ## Installation
@@ -54,8 +61,17 @@ return [
      * Database table name where your manager data will be stored
      */
     'database' => [
-        'table' => 'seo_manager'
-    ],
+            'table' => 'seo_manager',
+            'locales_table' => 'seo_manager_locales',
+            'translates_table' => 'seo_manager_translates'
+        ],
+        
+    /**
+     * Set default locale,
+     * It will be added as default locale
+     * when locales table migrated
+     */
+    'locale' => 'en',
 
     /**
      * Path where your eloquent models are
