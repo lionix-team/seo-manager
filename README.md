@@ -1,7 +1,8 @@
 # Seo Manager Package for Laravel ( with Localization )
 
 [![MadeWithLaravel.com shield](https://madewithlaravel.com/storage/repo-shields/1138-shield.svg)](https://madewithlaravel.com/p/seo-manager/shield-link)
-
+[![](https://img.shields.io/scrutinizer/g/filp/whoops.svg)](https://scrutinizer-ci.com/g/lionix-team/seo-manager/)
+[![](https://img.shields.io/scrutinizer/build/g/filp/whoops.svg)](https://scrutinizer-ci.com/g/lionix-team/seo-manager/)
 
 `lionix/seo-manager` package will provide 
 you an interface from where you can manage all your pages
