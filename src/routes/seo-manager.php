@@ -1,8 +1,8 @@
 <?php
 
 Route::group([
-    'middleware' => config('seo-manager.middleware'),
-    'prefix' => config('seo-manager.route'),
+    'middleware' => /** @scrutinizer ignore-call */config('seo-manager.middleware'),
+    'prefix' => /** @scrutinizer ignore-call */config('seo-manager.route'),
     'as' => 'seo-manager.',
     'namespace' => 'Lionix\SeoManager'
 ], function () {

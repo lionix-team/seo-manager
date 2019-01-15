@@ -16,7 +16,7 @@ class Translate extends Model
 
     public function __construct()
     {
-        $this->table = config('seo-manager.database.translates_table');
+        $this->table = /** @scrutinizer ignore-call */config('seo-manager.database.translates_table');
 
         parent::__construct();
     }

@@ -19,6 +19,7 @@ class ManagerController extends Controller
     public function __construct()
     {
         if(Input::get('locale')){
+            /** @scrutinizer ignore-call */
             app()->setLocale(Input::get('locale'));
             $this->locale = app()->getLocale();
         }
@@ -28,7 +29,7 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        return view('seo-manager::index');
+        return /** @scrutinizer ignore-call */ view('seo-manager::index');
     }
 
     /**
@@ -37,7 +38,7 @@ class ManagerController extends Controller
     public function getRoutes()
     {
         $routes = SeoManagerModel::all();
-        return response()->json(['routes' => $routes]);
+        return /** @scrutinizer ignore-call */ response()->json(['routes' => $routes]);
     }
 
     /**
@@ -47,9 +48,9 @@ class ManagerController extends Controller
     {
         try {
             $models = $this->getAllModels();
-            return response()->json(['models' => $models]);
+            return /** @scrutinizer ignore-call */ response()->json(['models' => $models]);
         } catch (\Exception $exception) {
-            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
+            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()]);
         }
     }
 
@@ -63,9 +64,9 @@ class ManagerController extends Controller
         try {
             $model = $request->get('model');
             $columns = $this->getColumns($model);
-            return response()->json(['columns' => $columns]);
+            return /** @scrutinizer ignore-call */ response()->json(['columns' => $columns]);
         } catch (\Exception $exception) {
-            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
+            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()]);
         }
     }
 
@@ -82,7 +83,7 @@ class ManagerController extends Controller
             $seoManager = SeoManagerModel::find($id);
             if (in_array($type, $allowedColumns)) {
                 $data = $request->get($type);
-                if($type != 'mapping' && $this->locale !== config('seo-manager.locale')){
+                if($type != 'mapping' && $this->locale !== /** @scrutinizer ignore-call */ config('seo-manager.locale')){
                     $translate = $seoManager->translation()->where('locale', $this->locale)->first();
                     if(!$translate){
                         $newInst = new Translate();
@@ -96,9 +97,9 @@ class ManagerController extends Controller
                     $seoManager->save();
                 }
             }
-            return response()->json([$type => $seoManager->$type]);
+            return /** @scrutinizer ignore-call */ response()->json([$type => $seoManager->$type]);
         } catch (\Exception $exception) {
-            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
+            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()]);
         }
     }
 
@@ -112,9 +113,9 @@ class ManagerController extends Controller
             $manager = SeoManagerModel::find($request->id);
             $titles = $request->get('title_dynamic');
             $exampleTitle = $this->getDynamicTitle($titles, $manager);
-            return response()->json(['example_title' => $exampleTitle]);
+            return /** @scrutinizer ignore-call */ response()->json(['example_title' => $exampleTitle]);
         } catch (\Exception $exception) {
-            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
+            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()]);
 
         }
     }
@@ -123,9 +124,9 @@ class ManagerController extends Controller
     {
         try {
             SeoManagerModel::destroy($request->id);
-            return response()->json(['deleted' => true]);
+            return /** @scrutinizer ignore-call */ response()->json(['deleted' => true]);
         } catch (\Exception $exception) {
-            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
+            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()]);
 
         }
     }

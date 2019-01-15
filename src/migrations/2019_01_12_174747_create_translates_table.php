@@ -13,7 +13,7 @@ class CreateTranslatesTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('seo-manager.database.translates_table'), function (Blueprint $table) {
+        Schema::create(/** @scrutinizer ignore-call */config('seo-manager.database.translates_table'), function (Blueprint $table) {
             $table->increments('id');
             $table->integer('route_id');
             $table->string('locale');
@@ -35,6 +35,6 @@ class CreateTranslatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('seo-manager.database.translates_table'));
+        Schema::dropIfExists(/** @scrutinizer ignore-call */config('seo-manager.database.translates_table'));
     }
 }
