@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Schema;
-use Lionix\SeoManager\Models\SeoManager;
+use Lionix\SeoManager\Models\SeoManager as SeoManagerModel;
 use Lionix\SeoManager\Models\Translate;
 use Lionix\SeoManager\Traits\SeoManagerTrait;
 
@@ -36,7 +36,7 @@ class ManagerController extends Controller
      */
     public function getRoutes()
     {
-        $routes = SeoManager::all();
+        $routes = SeoManagerModel::all();
         return response()->json(['routes' => $routes]);
     }
 
@@ -79,7 +79,7 @@ class ManagerController extends Controller
         try {
             $id = $request->get('id');
             $type = $request->get('type');
-            $seoManager = SeoManager::find($id);
+            $seoManager = SeoManagerModel::find($id);
             if (in_array($type, $allowedColumns)) {
                 $data = $request->get($type);
                 if($type != 'mapping' && $this->locale !== config('seo-manager.locale')){
@@ -109,7 +109,7 @@ class ManagerController extends Controller
     public function getExampleTitle(Request $request)
     {
         try {
-            $manager = SeoManager::find($request->id);
+            $manager = SeoManagerModel::find($request->id);
             $titles = $request->get('title_dynamic');
             $exampleTitle = $this->getDynamicTitle($titles, $manager);
             return response()->json(['example_title' => $exampleTitle]);
@@ -122,7 +122,7 @@ class ManagerController extends Controller
     public function deleteRoute(Request $request)
     {
         try {
-            SeoManager::destroy($request->id);
+            SeoManagerModel::destroy($request->id);
             return response()->json(['deleted' => true]);
         } catch (\Exception $exception) {
             return response()->json(['status' => false, 'message' => $exception->getMessage()]);

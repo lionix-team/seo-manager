@@ -8,10 +8,11 @@ use Lionix\SeoManager\Models\Locale;
 
 class LocalesController extends Controller
 {
+
     public function getLocales()
     {
         $locales = Locale::pluck('name');
-        return response()->json(['locales' => $locales]);
+        return /** @scrutinizer ignore-call */ response()->json(['locales' => $locales]);
     }
 
     public function addLocale(Request $request)
@@ -22,11 +23,11 @@ class LocalesController extends Controller
                 $locale = new Locale();
                 $locale->fill($request->all());
                 $locale->save();
-                return response()->json(['locale' => $locale->name]);
+                return /** @scrutinizer ignore-call */ response()->json(['locale' => $locale->name]);
             }
             throw new \Exception('Locale is already exist');
         }catch (\Exception $exception){
-            return response()->json(['status' => false, 'message' => $exception->getMessage()], 400);
+            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()], 400);
         }
     }
 }

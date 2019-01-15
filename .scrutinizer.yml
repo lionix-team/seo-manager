@@ -1,0 +1,7 @@
+filter:
+    excluded_paths:
+        - "assets/"
+        - "vue/"
+        # Everything in a root level "tests" directory will be excluded
+    dependency_paths:
+        - "Illuminate"
