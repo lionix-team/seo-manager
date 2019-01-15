@@ -16,7 +16,7 @@ class SeoManager
 
     /**
      * Get the array of the Seo meta data
-     * @param null $property
+     * @param $property
      * @return mixed
      */
     public function metaData($property = null)
@@ -82,7 +82,7 @@ class SeoManager
 
     /**
      * Get Open Graph Data
-     * @param null $property
+     * @param $property
      * @return mixed
      */
     public function metaOpenGraph($property = null)

@@ -2,8 +2,7 @@
 
 namespace Lionix\SeoManager\Commands;
 
-use Illuminate\Console\Command;
-use Lionix\SeoManager\Models\SeoManager;
+use /** @scrutinizer ignore-type */ Illuminate\Console\Command;
 use Lionix\SeoManager\Traits\SeoManagerTrait;
 
 class GenerateSeoManagerData extends Command

@@ -244,7 +244,7 @@ trait SeoManagerTrait
      * Get dynamic title based on user configs for current route
      * @param $params
      * @param $manager
-     * @param null $routeParams
+     * @param $routeParams
      * @return string
      */
     private function getDynamicTitle($params, $manager, $routeParams = null)
@@ -289,6 +289,7 @@ trait SeoManagerTrait
     private function getOgData($seoManager, $routeParams)
     {
         $dataArray = [];
+        $value = '';
         foreach ($seoManager->og_data as $key => $og) {
             if (is_array(reset($og['data']))) {
                 foreach ($og['data'] as $ogKey => $data) {
@@ -331,6 +332,7 @@ trait SeoManagerTrait
         $model = $mapping['model']['path'];
         $findBy = $mapping['find_by'];
         $selectedColumns = $mapping['selectedColumns'];
+        $mapped = null;
         if (in_array($paramsArray[1], $selectedColumns)) {
             $mapped = (new $model);
             if ($routeParams) {
