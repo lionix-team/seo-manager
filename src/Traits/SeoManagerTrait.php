@@ -198,6 +198,9 @@ trait SeoManagerTrait
         $route = \Route::current();
         $uri = $route->uri();
         $seoManager = SeoManager::where('uri', $uri)->first();
+        if(is_null($seoManager)){
+            return null;
+        }
         $metaData = [];
         if(count($seoManager->keywords) > 0){
             $metaData['keywords'] = implode(', ', $seoManager->keywords);
