@@ -32,20 +32,20 @@ class SeoManager extends Model
 
     public function __construct()
     {
-        $this->table = /** @scrutinizer ignore-call */config('seo-manager.database.table');
-        $this->locale = /** @scrutinizer ignore-call */app()->getLocale();
+        $this->table = config('seo-manager.database.table');
+        $this->locale = app()->getLocale();
 
         parent::__construct();
     }
 
     public function translation()
     {
-        return $this->hasOne(Translate::class, 'route_id', 'id')->where('locale', /** @scrutinizer ignore-call */app()->getLocale());
+        return $this->hasOne(Translate::class, 'route_id', 'id')->where('locale', app()->getLocale());
     }
 
     private function isNotDefaultLocale()
     {
-        return $this->locale !== /** @scrutinizer ignore-call */config('seo-manager.locale') && $this->has('translation');
+        return $this->locale !== config('seo-manager.locale') && $this->has('translation');
     }
 
     public function getKeywordsAttribute($value)

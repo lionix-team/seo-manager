@@ -13,14 +13,14 @@ class CreateLocalesTable extends Migration
      */
     public function up()
     {
-        Schema::create(/** @scrutinizer ignore-call */config('seo-manager.database.locales_table'), function (Blueprint $table) {
+        Schema::create(config('seo-manager.database.locales_table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
         });
 
-        \Illuminate\Support\Facades\DB::table(/** @scrutinizer ignore-call */config('seo-manager.database.locales_table'))->insert([
-            'name' => /** @scrutinizer ignore-call */config('seo-manager.locale'),
+        \Illuminate\Support\Facades\DB::table(config('seo-manager.database.locales_table'))->insert([
+            'name' => config('seo-manager.locale'),
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
         ]);
@@ -33,6 +33,6 @@ class CreateLocalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(/** @scrutinizer ignore-call */config('seo-manager.database.locales_table'));
+        Schema::dropIfExists(config('seo-manager.database.locales_table'));
     }
 }

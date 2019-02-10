@@ -27,8 +27,8 @@ trait SeoManagerTrait
 
     public function __construct()
     {
-        $this->exceptRoutes = array_merge($this->exceptRoutes, /** @scrutinizer ignore-call */ config('seo-manager.except_routes'));
-        $this->exceptColumns = array_merge($this->exceptColumns, /** @scrutinizer ignore-call */ config('seo-manager.except_columns'));
+        $this->exceptRoutes = array_merge($this->exceptRoutes, config('seo-manager.except_routes'));
+        $this->exceptColumns = array_merge($this->exceptColumns, config('seo-manager.except_columns'));
     }
 
     /**
@@ -107,7 +107,7 @@ trait SeoManagerTrait
      */
     private function getAllModels()
     {
-        $path = /** @scrutinizer ignore-call */ base_path('app') . '/' . /** @scrutinizer ignore-call */ config('seo-manager.models_path');
+        $path = base_path('app') . '/' . config('seo-manager.models_path');
 
         $models = File::allFiles($path);
         $cleanModelNames = [];
@@ -214,7 +214,7 @@ trait SeoManagerTrait
         if($seoManager->url){
             $metaData['url'] = $seoManager->url;
         }else{
-            $metaData['url'] = /** @scrutinizer ignore-call */ url()->full();
+            $metaData['url'] = url()->full();
         }
         if($seoManager->author){
             $metaData['author'] = $seoManager->author;
@@ -311,7 +311,7 @@ trait SeoManagerTrait
                 } elseif ($og['data']['value']) {
                     $value = $og['data']['value'];
                 } elseif ($key === 'url') {
-                    $value = /** @scrutinizer ignore-call */ url()->full();
+                    $value = url()->full();
                 }
                 if ($og['data']['value'] || $key === 'url') {
                     $dataArray['og:' . $key] = $value;

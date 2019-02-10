@@ -10,9 +10,12 @@ class Locale extends Model
 
     protected $fillable = ['name'];
 
+    /**
+     * Locale constructor.
+     */
     public function __construct()
     {
-        $this->table = /** @scrutinizer ignore-call */config('seo-manager.database.locales_table');
+        $this->table = config('seo-manager.database.locales_table');
 
         parent::__construct();
     }

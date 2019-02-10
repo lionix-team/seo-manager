@@ -4,10 +4,20 @@
             <div v-if="!mapping" class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Open Graph</h5>
-                        <button type="button" @click="closeModal" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <div class="row align-items-center open-header">
+                            <div class="col">
+                                <h5 class="modal-title">Open Graph</h5>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-success preview" @click="preview">Preview</button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" @click="closeModal" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-body">
                         <div id="data-form">
@@ -41,7 +51,8 @@
                                                                    v-model="ogData[key].data[dataKey].value"
                                                                    :readonly="ogData[key].data[dataKey].mapped"
                                                                    :placeholder="dataKey">
-                                                            <div v-if="ogData[key].data[dataKey].mapped" class="input-group-append">
+                                                            <div v-if="ogData[key].data[dataKey].mapped"
+                                                                 class="input-group-append">
                                                                 <button @click="removeMapping(key,dataKey)"
                                                                         class="btn btn-danger"
                                                                         type="button">
@@ -81,7 +92,8 @@
                                                         </div>
 
                                                     </div>
-                                                    <p v-if="key === 'url'" class="url-feedback">Leave this field empty to map to route url</p>
+                                                    <p v-if="key === 'url'" class="url-feedback">Leave this field empty
+                                                        to map to route url</p>
                                                 </div>
 
                                             </td>
@@ -98,9 +110,9 @@
                                                 class="btn btn-primary submit_button" :class="{'is-loading': saving}">
                                             Save Open Graph Data
                                         </button>
+                                        <span class="text-success" v-if="saved">Saved</span>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -108,9 +120,10 @@
             </div>
             <!--Mappings-->
             <app-title-mapping v-if="showTitleMapping" @finish-mapping="finishMapping" :ogData="ogData"
-                               :current="current" :route="route"></app-title-mapping>
+                               :current="current" :route="route" :locale="locale"></app-title-mapping>
             <app-params-mapping v-if="showParamsPapping" @finish-mapping="finishMapping" :ogData="ogData"
                                 :current="current" :subParam="subParam" :route="route"></app-params-mapping>
+            <app-preview-modal v-if="showPreviewModal" @close-preview="closePreview" :route="route" :locale="locale"></app-preview-modal>
         </div>
         <div class="modal-backdrop fade" :class="{show: showModal}"></div>
     </div>
@@ -120,6 +133,7 @@
     import {EventBus} from "../../../../event_bus";
     import TitleMapping from '../mappings/TitleMapping'
     import ParamsMapping from '../mappings/ParamsMapping'
+    import PreviewModal from './PreviewModal'
 
     export default {
         name: "OgDataModal",
@@ -136,12 +150,14 @@
         },
         components: {
             'app-title-mapping': TitleMapping,
-            'app-params-mapping': ParamsMapping
+            'app-params-mapping': ParamsMapping,
+            'app-preview-modal': PreviewModal
         },
         data() {
             return {
                 showTitleMapping: false,
                 showParamsPapping: false,
+                showPreviewModal: false,
                 types: [
                     'website',
                     'article',
@@ -153,6 +169,7 @@
                 current: '',
                 subParam: '',
                 saving: false,
+                saved:false,
                 mapping: false,
                 hiddenParams: [
                     'article',
@@ -357,7 +374,7 @@
             }
         },
         mounted() {
-            if(this.route.og_data !== null) {
+            if (this.route.og_data !== null) {
                 this.ogData = this.route.og_data;
             }
         },
@@ -382,10 +399,10 @@
                 }
             },
             removeMapping(param, subParam) {
-                if(subParam){
+                if (subParam) {
                     this.ogData[param].data[subParam].mapped = false;
                     this.ogData[param].data[subParam].value = '';
-                }else{
+                } else {
                     this.ogData[param].data.mapped = false;
                     this.ogData[param].data.value = '';
                 }
@@ -396,16 +413,29 @@
                 this.showTitleMapping = false;
                 this.showParamsPapping = false;
             },
+            preview(){
+                this.mapping = true;
+                this.showPreviewModal = true;
+            },
+            closePreview(){
+                this.mapping = false;
+                this.showPreviewModal = false;
+            },
             save() {
                 this.saving = true;
-                this.$http.post(API_URL + '/store-data?locale='+this.locale, {
+                this.$http.post(API_URL + '/store-data?locale=' + this.locale, {
                     id: this.route.id,
                     type: 'og_data',
                     og_data: this.ogData
                 }).then(response => {
                     this.saving = false;
                     this.route.og_data = response.data.og_data;
-                    this.closeModal();
+                    this.saved = true;
+                    let vm = this;
+                    setTimeout(function(){
+                        vm.saved = false;
+                    },2000)
+                    // this.closeModal();
                 })
             },
         }
@@ -471,9 +501,14 @@
     .input-group-append .btn, .input-group-prepend .btn {
         z-index: 0;
     }
-    .url-feedback{
+
+    .url-feedback {
         margin-bottom: 0;
-        margin-top:10px;
+        margin-top: 10px;
         color: #dadada;
+    }
+
+    .open-header {
+        width: 100%;
     }
 </style>

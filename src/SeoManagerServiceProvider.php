@@ -20,11 +20,11 @@ class SeoManagerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/views', 'seo-manager');
 
         $this->publishes([
-            __DIR__ . '/config/seo-manager.php' => /** @scrutinizer ignore-call */config_path('seo-manager.php'),
+            __DIR__ . '/config/seo-manager.php' => config_path('seo-manager.php'),
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/assets' => /** @scrutinizer ignore-call */ public_path('vendor/lionix'),
+            __DIR__ . '/assets' =>  public_path('vendor/lionix'),
         ], 'assets');
 
         $this->commands([
@@ -35,7 +35,7 @@ class SeoManagerServiceProvider extends ServiceProvider
         $router = $this->app['router'];
         $router->pushMiddlewareToGroup('web', \Lionix\SeoManager\Middleware\ClearViewCache::class);
 
-        if (/** @scrutinizer ignore-call */config('seo-manager.shared_meta_data')) {
+        if (config('seo-manager.shared_meta_data')) {
             $router->pushMiddlewareToGroup('web', \Lionix\SeoManager\Middleware\SeoManager::class);
         }
 

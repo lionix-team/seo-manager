@@ -19,7 +19,6 @@ class ManagerController extends Controller
     public function __construct()
     {
         if(Input::get('locale')){
-            /** @scrutinizer ignore-call */
             app()->setLocale(Input::get('locale'));
             $this->locale = app()->getLocale();
         }
@@ -29,7 +28,7 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        return /** @scrutinizer ignore-call */ view('seo-manager::index');
+        return view('seo-manager::index');
     }
 
     /**
@@ -38,7 +37,7 @@ class ManagerController extends Controller
     public function getRoutes()
     {
         $routes = SeoManagerModel::all();
-        return /** @scrutinizer ignore-call */ response()->json(['routes' => $routes]);
+        return response()->json(['routes' => $routes]);
     }
 
     /**
@@ -48,9 +47,9 @@ class ManagerController extends Controller
     {
         try {
             $models = $this->getAllModels();
-            return /** @scrutinizer ignore-call */ response()->json(['models' => $models]);
+            return response()->json(['models' => $models]);
         } catch (\Exception $exception) {
-            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()]);
+            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
         }
     }
 
@@ -64,9 +63,9 @@ class ManagerController extends Controller
         try {
             $model = $request->get('model');
             $columns = $this->getColumns($model);
-            return /** @scrutinizer ignore-call */ response()->json(['columns' => $columns]);
+            return response()->json(['columns' => $columns]);
         } catch (\Exception $exception) {
-            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()]);
+            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
         }
     }
 
@@ -83,7 +82,7 @@ class ManagerController extends Controller
             $seoManager = SeoManagerModel::find($id);
             if (in_array($type, $allowedColumns)) {
                 $data = $request->get($type);
-                if($type != 'mapping' && $this->locale !== /** @scrutinizer ignore-call */ config('seo-manager.locale')){
+                if($type != 'mapping' && $this->locale !== config('seo-manager.locale')){
                     $translate = $seoManager->translation()->where('locale', $this->locale)->first();
                     if(!$translate){
                         $newInst = new Translate();
@@ -97,9 +96,9 @@ class ManagerController extends Controller
                     $seoManager->save();
                 }
             }
-            return /** @scrutinizer ignore-call */ response()->json([$type => $seoManager->$type]);
+            return response()->json([$type => $seoManager->$type]);
         } catch (\Exception $exception) {
-            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()]);
+            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
         }
     }
 
@@ -113,21 +112,38 @@ class ManagerController extends Controller
             $manager = SeoManagerModel::find($request->id);
             $titles = $request->get('title_dynamic');
             $exampleTitle = $this->getDynamicTitle($titles, $manager);
-            return /** @scrutinizer ignore-call */ response()->json(['example_title' => $exampleTitle]);
+            return response()->json(['example_title' => $exampleTitle]);
         } catch (\Exception $exception) {
-            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()]);
-
+            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
         }
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function deleteRoute(Request $request)
     {
         try {
             SeoManagerModel::destroy($request->id);
-            return /** @scrutinizer ignore-call */ response()->json(['deleted' => true]);
+            return response()->json(['deleted' => true]);
         } catch (\Exception $exception) {
-            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()]);
-
+            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
         }
+    }
+
+    /**
+     * @param Request $request
+     * @return array|null
+     */
+    public function sharingPreview(Request $request)
+    {
+        $id = $request->get('id');
+        $seoManager = SeoManagerModel::find($id);
+        if(is_null($seoManager)){
+            return null;
+        }
+        $ogData = $this->getOgData($seoManager, null);
+        return response()->json(['og_data' => $ogData]);
     }
 }

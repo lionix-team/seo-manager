@@ -19,9 +19,9 @@ class ImportController extends Controller
     {
         try {
             $routes = $this->importRoutes();
-            return /** @scrutinizer ignore-call */ response()->json(['routes' => $routes]);
+            return response()->json(['routes' => $routes]);
         } catch (\Exception $exception) {
-            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()]);
+            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
         }
     }
 }

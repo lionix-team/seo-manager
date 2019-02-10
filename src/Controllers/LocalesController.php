@@ -9,12 +9,19 @@ use Lionix\SeoManager\Models\Locale;
 class LocalesController extends Controller
 {
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getLocales()
     {
         $locales = Locale::pluck('name');
-        return /** @scrutinizer ignore-call */ response()->json(['locales' => $locales]);
+        return response()->json(['locales' => $locales]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function addLocale(Request $request)
     {
         try{
@@ -23,11 +30,11 @@ class LocalesController extends Controller
                 $locale = new Locale();
                 $locale->fill($request->all());
                 $locale->save();
-                return /** @scrutinizer ignore-call */ response()->json(['locale' => $locale->name]);
+                return response()->json(['locale' => $locale->name]);
             }
             throw new \Exception('Locale is already exist');
         }catch (\Exception $exception){
-            return /** @scrutinizer ignore-call */ response()->json(['status' => false, 'message' => $exception->getMessage()], 400);
+            return response()->json(['status' => false, 'message' => $exception->getMessage()], 400);
         }
     }
 }

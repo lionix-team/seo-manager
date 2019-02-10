@@ -102,6 +102,9 @@
             },
             route:{
                 type:Object
+            },
+            locale: {
+                type: String
             }
         },
         data() {
@@ -144,7 +147,7 @@
                 this.getExampleTitle();
             },
             getExampleTitle() {
-                this.$http.post(API_URL + '/get-example-title', this.route).then(response => {
+                this.$http.post(API_URL + '/get-example-title?locale='+this.locale, this.route).then(response => {
                     this.example_title = response.data.example_title;
                 })
             },

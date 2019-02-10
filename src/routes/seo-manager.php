@@ -1,8 +1,8 @@
 <?php
 
 Route::group([
-    'middleware' => /** @scrutinizer ignore-call */config('seo-manager.middleware'),
-    'prefix' => /** @scrutinizer ignore-call */config('seo-manager.route'),
+    'middleware' => config('seo-manager.middleware'),
+    'prefix' => config('seo-manager.route'),
     'as' => 'seo-manager.',
     'namespace' => 'Lionix\SeoManager'
 ], function () {
@@ -14,6 +14,7 @@ Route::group([
     Route::post('get-model-columns', 'ManagerController@getModelColumns')->name('get-model-columns');
     Route::post('store-data', 'ManagerController@storeData')->name('store-data');
     Route::post('get-example-title', 'ManagerController@getExampleTitle')->name('get-example-title');
+    Route::post('sharing-preview', 'ManagerController@sharingPreview')->name('sharing-preview');
     Route::group(['prefix' => 'locales', 'as' => 'locales.'], function () {
         Route::get('get-locales', 'LocalesController@getLocales')->name('get');
         Route::post('add-locale', 'LocalesController@addLocale')->name('add');
