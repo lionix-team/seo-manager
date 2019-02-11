@@ -242,7 +242,7 @@ array:7 [▼
 
 *Example*
 
-`SeoManager::metaOpenGraph('og:image:url)`
+`SeoManager::metaOpenGraph('og:image:url')`
 
 Will return
 `"https://wallpaperbrowse.com/media/images/3848765-wallpaper-images-download.jpg"`
