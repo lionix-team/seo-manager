@@ -1,7 +1,8 @@
 <?php
-
+$web = ['web'];
+$middleware = array_merge($web,config('seo-manager.middleware'));
 Route::group([
-    'middleware' => config('seo-manager.middleware'),
+    'middleware' => $middleware,
     'prefix' => config('seo-manager.route'),
     'as' => 'seo-manager.',
     'namespace' => 'Lionix\SeoManager'
