@@ -196,6 +196,9 @@ trait SeoManagerTrait
     private function getMetaData($property)
     {
         $route = \Route::current();
+        if (is_null($route)){
+            return null;
+        }
         $uri = $route->uri();
         $seoManager = SeoManager::where('uri', $uri)->first();
         if(is_null($seoManager)){
