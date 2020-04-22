@@ -4,7 +4,7 @@ namespace Lionix\SeoManager;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+// use Illuminate\Support\Facades\Input; // Outdated in Laravel 6
 use Illuminate\Support\Facades\Schema;
 use Lionix\SeoManager\Models\SeoManager as SeoManagerModel;
 use Lionix\SeoManager\Models\Translate;
@@ -16,13 +16,14 @@ class ManagerController extends Controller
 
     protected $locale;
 
-    public function __construct()
+    public function __construct(Request $request)
     {
-        if(Input::get('locale')){
-            app()->setLocale(Input::get('locale'));
+        if($request->locale){
+            app()->setLocale($request->locale);
             $this->locale = app()->getLocale();
         }
-}
+    }
+    
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
