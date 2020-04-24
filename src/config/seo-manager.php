@@ -33,6 +33,7 @@ return [
      * to prevent unauthorized users visit the manager
      */
     'middleware' => [
+        'web'
         //  'auth',
     ],
 
