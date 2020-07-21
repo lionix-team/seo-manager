@@ -64,12 +64,18 @@
                 EventBus.$emit('close-modal', 'title');
             },
             storeTitle() {
+                console.log('storetitle');
+                console.log(CSRF_TOKEN);
+                let local_csrf_token = CSRF_TOKEN;
+                console.log(local_csrf_token);
                 this.saving = true;
-                this.$http.post(API_URL + '/store-data?locale='+this.locale, {
+                this.$http.post(API_URL + '/store-data?locale='+this.locale,
+                    {
                     id: this.route.id,
                     type: 'title',
-                    title: this.route.title
-                }).then(response => {
+                    title: this.route.title,
+                    _token: CSRF_TOKEN
+                    }).then(response => {
                     this.saving = false;
                     EventBus.$emit('title-changed');
                     this.closeModal();

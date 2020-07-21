@@ -68,7 +68,8 @@
                 this.$http.post(API_URL + '/store-data?locale='+this.locale, {
                     id: this.route.id,
                     type: 'author',
-                    author: this.route.author
+                    author: this.route.author,
+                    _token: CSRF_TOKEN
                 }).then(response => {
                     this.saving = false;
                     this.closeModal();
