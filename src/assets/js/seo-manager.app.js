@@ -2646,10 +2646,6 @@ __webpack_require__.r(__webpack_exports__);
     storeTitle: function storeTitle() {
       var _this = this;
 
-      console.log('storetitle');
-      console.log(CSRF_TOKEN);
-      var local_csrf_token = CSRF_TOKEN;
-      console.log(local_csrf_token);
       this.saving = true;
       this.$http.post(API_URL + '/store-data?locale=' + this.locale, {
         id: this.route.id,

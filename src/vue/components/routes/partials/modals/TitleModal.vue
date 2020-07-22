@@ -64,10 +64,6 @@
                 EventBus.$emit('close-modal', 'title');
             },
             storeTitle() {
-                console.log('storetitle');
-                console.log(CSRF_TOKEN);
-                let local_csrf_token = CSRF_TOKEN;
-                console.log(local_csrf_token);
                 this.saving = true;
                 this.$http.post(API_URL + '/store-data?locale='+this.locale,
                     {
