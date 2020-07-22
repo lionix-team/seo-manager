@@ -19,15 +19,6 @@ Vue.filter('uppercase', function (value) {
 Vue.directive('click-outside', ClickOutside);
 Vue.component('multi-select', MultiSelect);
 
-// if(CSRF_TOKEN){
-//     console.log('whut')
-//     Vue.http.interceptors.push(function (request, next) {
-//         request.headers['X-CSRF-TOKEN'] = CSRF_TOKEN;
-//         console.log(CSRF_TOKEN);
-//         next();
-//     });
-// }
-
 new Vue({
     el: '#lionix-seo-manager-app',
     store,
