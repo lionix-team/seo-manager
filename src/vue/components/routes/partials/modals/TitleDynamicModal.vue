@@ -155,7 +155,8 @@
                 this.$http.post(API_URL + '/store-data?locale='+this.locale, {
                     id: this.route.id,
                     type: 'title_dynamic',
-                    title_dynamic: this.route.title_dynamic
+                    title_dynamic: this.route.title_dynamic,
+                    _token: CSRF_TOKEN
                 }).then(response => {
                     this.saving = false;
                     EventBus.$emit('title-changed');

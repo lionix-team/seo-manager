@@ -65,11 +65,13 @@
             },
             storeTitle() {
                 this.saving = true;
-                this.$http.post(API_URL + '/store-data?locale='+this.locale, {
+                this.$http.post(API_URL + '/store-data?locale='+this.locale,
+                    {
                     id: this.route.id,
                     type: 'title',
-                    title: this.route.title
-                }).then(response => {
+                    title: this.route.title,
+                    _token: CSRF_TOKEN
+                    }).then(response => {
                     this.saving = false;
                     EventBus.$emit('title-changed');
                     this.closeModal();

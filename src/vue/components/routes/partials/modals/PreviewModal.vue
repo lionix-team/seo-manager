@@ -69,7 +69,10 @@
         },
         methods: {
             getSharingPreview() {
-                this.$http.post(API_URL + '/sharing-preview?locale=' + this.locale, {id: this.route.id}).then(response => {
+                this.$http.post(API_URL + '/sharing-preview?locale=' + this.locale, {
+                    id: this.route.id,
+                    _token: CSRF_TOKEN
+                }).then(response => {
                     this.ogData = response.data.og_data;
                     this.loaded = true;
                 })

@@ -12,6 +12,7 @@
 
     <script>
         let API_URL = '{{ route('seo-manager.home') }}';
+        let CSRF_TOKEN = '{{ csrf_token() }}';
     </script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
