@@ -328,7 +328,26 @@ and pass param there like `@openGraph('og:url)`
 
 `@titleDynamic` - will return dynamically generated title which you can use inside your `<title></title>` tags.
 
+## Contributing
 
+### How to start developing on this project
+
+1. Install the module in a existing Laravel project and check if the module is working.
+
+2. Delete the folder vendor/lionix/seo-manager.
+
+3. Copy the fork of the module in the vendor/lionix/seo-manager folder
+(don't know  how to make a fork? https://kbroman.org/github_tutorial/pages/fork.html)
+
+4. Add the following line to your webpack.mix.js
+`mix.js('vendor/lionix/seo-manager/src/vue/seo-manager.app.js', 'public/vendor/lionix/js');`
+
+5. run the NPM Watch command `npm run watch`
+
+6. If everything works fine, you can start developing on the module
+
+7. **PLEASE REMIND TO COPY 
+YOUR `public/vendor/lionix/js/seo-manager.app.js` TO `vendor/lionix/seo-manager/src/assets/seo-manager.app.js`**
 
 ## Credits
 
