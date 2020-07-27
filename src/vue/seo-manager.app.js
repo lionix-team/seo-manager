@@ -11,6 +11,7 @@ Vue.use(VueResource);
 Vue.use(VueSweetalert2);
 
 const API_URL = window.API_URL;
+const CSRF_TOKEN = window.CSRF_TOKEN;
 
 Vue.filter('uppercase', function (value) {
     return value.toUpperCase()
