@@ -235,7 +235,6 @@
             deleteRoute() {
                 let that = this;
                 EventBus.$on('delete-route', function (route) {
-                    console.log(route);
                     that.$http.post(API_URL + '/delete-route',
                         {
                             id: route.id,
