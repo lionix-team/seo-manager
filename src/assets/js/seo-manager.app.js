@@ -558,7 +558,11 @@ __webpack_require__.r(__webpack_exports__);
     deleteRoute: function deleteRoute() {
       var that = this;
       _event_bus__WEBPACK_IMPORTED_MODULE_9__["EventBus"].$on('delete-route', function (route) {
-        that.$http.post(API_URL + '/delete-route', route).then(function (response) {
+        console.log(route);
+        that.$http.post(API_URL + '/delete-route', {
+          id: route.id,
+          _token: CSRF_TOKEN
+        }).then(function (response) {
           if (response.data.deleted) {
             that.routes.splice(that.routes.indexOf(route), 1);
             that.$swal('Deleted!', 'Your route has been deleted.', 'success');
