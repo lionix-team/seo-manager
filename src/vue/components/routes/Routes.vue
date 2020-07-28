@@ -235,7 +235,12 @@
             deleteRoute() {
                 let that = this;
                 EventBus.$on('delete-route', function (route) {
-                    that.$http.post(API_URL + '/delete-route', route).then(response => {
+                    that.$http.post(API_URL + '/delete-route',
+                        {
+                            id: route.id,
+                            _token: CSRF_TOKEN
+                        }
+                    ).then(response => {
                         if (response.data.deleted) {
                             that.routes.splice(that.routes.indexOf(route), 1);
                             that.$swal(
