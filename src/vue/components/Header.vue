@@ -95,7 +95,10 @@
                     confirmButtonText: 'Add',
                     showLoaderOnConfirm: true,
                     preConfirm: (locale) => {
-                        that.$http.post(API_URL + '/locales/add-locale', {name: locale}).then(response => {
+                        that.$http.post(API_URL + '/locales/add-locale', {
+                            name: locale,
+                            _token: CSRF_TOKEN
+                        }).then(response => {
                             that.locales.push(response.data.locale);
                             that.$swal(
                                 'Added!',

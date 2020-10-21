@@ -122,7 +122,10 @@
                 })
             },
             getModelColumns(mapping, param) {
-                this.$http.post(API_URL + '/get-model-columns', {model: mapping.model.path}).then(response => {
+                this.$http.post(API_URL + '/get-model-columns', {
+                    model: mapping.model.path,
+                    _token: CSRF_TOKEN
+                }).then(response => {
                     this.params[param].columns = response.data.columns;
                 })
             },
@@ -131,7 +134,8 @@
                 this.$http.post(API_URL + '/store-data', {
                     id: this.route.id,
                     type: 'mapping',
-                    mapping: this.params
+                    mapping: this.params,
+                    _token: CSRF_TOKEN
                 }).then(response => {
                     this.saving = false;
                     this.route.mapping = response.data.mapping;
