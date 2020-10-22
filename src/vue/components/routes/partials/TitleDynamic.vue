@@ -51,7 +51,10 @@
             },
             getExampleTitle(locale) {
                 if (this.route.title_dynamic !== null && this.route.title_dynamic.length > 0) {
-                    this.$http.post(API_URL + '/get-example-title?locale=' + locale, this.route).then(response => {
+                    this.$http.post(API_URL + '/get-example-title?locale=' + locale, {
+                        route: this.route,
+                        _token: CSRF_TOKEN
+                    }).then(response => {
                         this.example_title = response.data.example_title;
                     })
                 }

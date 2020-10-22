@@ -18,12 +18,12 @@ class ManagerController extends Controller
 
     public function __construct(Request $request)
     {
-        if($request->locale){
-            app()->setLocale($request->locale);
+        if($request->get('locale')){
+            app()->setLocale($request->get('locale'));
             $this->locale = app()->getLocale();
         }
     }
-    
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -109,9 +109,10 @@ class ManagerController extends Controller
      */
     public function getExampleTitle(Request $request)
     {
+        $route = $request->get('route');
         try {
-            $manager = SeoManagerModel::find($request->id);
-            $titles = $request->get('title_dynamic');
+            $manager = SeoManagerModel::find($route['id']);
+            $titles = $route['title_dynamic'];
             $exampleTitle = $this->getDynamicTitle($titles, $manager);
             return response()->json(['example_title' => $exampleTitle]);
         } catch (\Exception $exception) {

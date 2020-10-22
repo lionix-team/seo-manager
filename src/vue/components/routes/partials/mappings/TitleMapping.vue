@@ -147,7 +147,10 @@
                 this.getExampleTitle();
             },
             getExampleTitle() {
-                this.$http.post(API_URL + '/get-example-title?locale='+this.locale, this.route).then(response => {
+                this.$http.post(API_URL + '/get-example-title?locale='+this.locale, {
+                    route: this.route,
+                    _token: CSRF_TOKEN
+                }).then(response => {
                     this.example_title = response.data.example_title;
                 })
             },
