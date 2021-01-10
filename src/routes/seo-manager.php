@@ -5,7 +5,7 @@ Route::group([
     'middleware' => $middleware,
     'prefix' => config('seo-manager.route'),
     'as' => 'seo-manager.',
-    'namespace' => 'Lionix\SeoManager'
+    'namespace' => 'Lionix\SeoManager\Controllers'
 ], function () {
     Route::get('/', 'ManagerController@index')->name('home');
     Route::get('get-routes', 'ManagerController@getRoutes')->name('get-routes');
@@ -20,7 +20,7 @@ Route::group([
     'middleware' => config('seo-manager.middleware'),
     'prefix' => config('seo-manager.route'),
     'as' => 'seo-manager.',
-    'namespace' => 'Lionix\SeoManager'
+    'namespace' => 'Lionix\SeoManager\Controllers'
 ], function () {
     Route::post('delete-route', 'ManagerController@deleteRoute')->name('delete-route');
     Route::post('get-model-columns', 'ManagerController@getModelColumns')->name('get-model-columns');

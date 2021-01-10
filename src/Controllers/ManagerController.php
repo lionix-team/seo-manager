@@ -1,6 +1,6 @@
 <?php
 
-namespace Lionix\SeoManager;
+namespace Lionix\SeoManager\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
