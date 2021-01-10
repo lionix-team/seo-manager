@@ -265,13 +265,17 @@ trait SeoManagerTrait
                     $model = $mapping['model']['path'];
                     $findBy = $mapping['find_by'];
                     $selectedColumns = $mapping['selectedColumns'];
+
                     if (in_array($paramsArray[1], $selectedColumns)) {
                         $mappedTitle = (new $model);
+
                         if ($routeParams) {
-                            $mappedTitle = $mappedTitle->where($findBy, $routeParams[$paramsArray[0]])->first();
+                            $value = is_a($routeParams[$paramsArray[0]], $model) ? $routeParams[$paramsArray[0]]->$findBy : $routeParams[$paramsArray[0]];
+                            $mappedTitle = $mappedTitle->where($findBy, $value)->first();
                         } else {
                             $mappedTitle = $mappedTitle->first();
                         }
+
                         if ($mappedTitle) {
                             $dynamicTitle .= optional($mappedTitle)->{$paramsArray[1]} . ' ';
                         }
