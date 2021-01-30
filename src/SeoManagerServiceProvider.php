@@ -75,7 +75,6 @@ class SeoManagerServiceProvider extends ServiceProvider
      */
     public function registerBladeDirectives()
     {
-
         Blade::directive('meta', function ($expression) {
             $meta = '';
             $expression = trim($expression, '\"\'');
@@ -85,24 +84,24 @@ class SeoManagerServiceProvider extends ServiceProvider
                     $meta .= "<meta property='{$key}' content='{$og}'/>";
                 }
             } else {
-                $meta .= "<meta property='{$expression}' content='{$metaData}'/>";
+                $meta .= "<meta name='{$expression}' content='{$metaData}'/>";
             }
             return $meta;
         });
         Blade::directive('keywords', function () {
-            return "<meta property='keywords' content='" . metaKeywords() . "'/>";
+            return "<meta name='keywords' content='" . metaKeywords() . "'/>";
         });
         Blade::directive('url', function () {
-            return "<meta property='url' content='" . metaUrl() . "'/>";
+            return "<meta name='url' content='" . metaUrl() . "'/>";
         });
         Blade::directive('author', function () {
-            return "<meta property='author' content='" . metaAuthor() . "'/>";
+            return "<meta name='author' content='" . metaAuthor() . "'/>";
         });
         Blade::directive('description', function () {
-            return "<meta property='description' content='" . metaDescription() . "'/>";
+            return "<meta name='description' content='" . metaDescription() . "'/>";
         });
         Blade::directive('title', function () {
-            return "<meta property='title' content='" . metaTitle() . "'/>";
+            return "<meta name='title' content='" . metaTitle() . "'/>";
         });
         Blade::directive('openGraph', function ($expression) {
             $expression = trim($expression, '\"\'');
@@ -113,7 +112,7 @@ class SeoManagerServiceProvider extends ServiceProvider
                     $meta .= "<meta property='{$key}' content='{$og}'/>";
                 }
             } else {
-                $meta .= "<meta property='{$expression}' content='{$metaOpenGraph}'/>";
+                $meta .= "<meta name='{$expression}' content='{$metaOpenGraph}'/>";
             }
             return $meta;
         });
