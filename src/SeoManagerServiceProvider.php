@@ -24,7 +24,7 @@ class SeoManagerServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/assets' =>  public_path('vendor/lionix'),
+            __DIR__ . '/assets' => public_path('vendor/lionix'),
         ], 'assets');
 
         $this->commands([
@@ -75,16 +75,28 @@ class SeoManagerServiceProvider extends ServiceProvider
      */
     public function registerBladeDirectives()
     {
-        Blade::directive('meta', function ($expression) {
+        $names = [
+            'keywords',
+            'url',
+            'author',
+            'description',
+            'title',
+        ];
+
+        Blade::directive('meta', function ($expression) use ($names) {
             $meta = '';
             $expression = trim($expression, '\"\'');
             $metaData = metaData($expression);
+            $type = in_array($expression, $names) ? "name" : "property";
+
             if (is_array($metaData)) {
                 foreach ($metaData as $key => $og) {
-                    $meta .= "<meta property='{$key}' content='{$og}'/>";
+                    $type = in_array($key, $names) ? "name" : "property";
+
+                    $meta .= "<meta {$type}='{$key}' content='{$og}'/>";
                 }
             } else {
-                $meta .= "<meta name='{$expression}' content='{$metaData}'/>";
+                $meta .= "<meta {$type}='{$expression}' content='{$metaData}'/>";
             }
             return $meta;
         });
@@ -112,7 +124,7 @@ class SeoManagerServiceProvider extends ServiceProvider
                     $meta .= "<meta property='{$key}' content='{$og}'/>";
                 }
             } else {
-                $meta .= "<meta name='{$expression}' content='{$metaOpenGraph}'/>";
+                $meta .= "<meta property='{$expression}' content='{$metaOpenGraph}'/>";
             }
             return $meta;
         });
