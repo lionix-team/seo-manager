@@ -93,27 +93,27 @@ class SeoManagerServiceProvider extends ServiceProvider
                 foreach ($metaData as $key => $og) {
                     $type = in_array($key, $names) ? "name" : "property";
 
-                    $meta .= "<meta {$type}='{$key}' content='{$og}'/>";
+                    $meta .= "<meta {$type}='{$key}' content='{$og}'/>\n";
                 }
             } else {
-                $meta .= "<meta {$type}='{$expression}' content='{$metaData}'/>";
+                $meta .= "<meta {$type}='{$expression}' content='{$metaData}'/>\n";
             }
             return $meta;
         });
         Blade::directive('keywords', function () {
-            return "<meta name='keywords' content='" . metaKeywords() . "'/>";
+            return "<meta name='keywords' content='" . metaKeywords() . "'/>\n";
         });
         Blade::directive('url', function () {
-            return "<meta name='url' content='" . metaUrl() . "'/>";
+            return "<meta name='url' content='" . metaUrl() . "'/>\n";
         });
         Blade::directive('author', function () {
-            return "<meta name='author' content='" . metaAuthor() . "'/>";
+            return "<meta name='author' content='" . metaAuthor() . "'/>\n";
         });
         Blade::directive('description', function () {
-            return "<meta name='description' content='" . metaDescription() . "'/>";
+            return "<meta name='description' content='" . metaDescription() . "'/>\n";
         });
         Blade::directive('title', function () {
-            return "<meta name='title' content='" . metaTitle() . "'/>";
+            return "<meta name='title' content='" . metaTitle() . "'/>\n";
         });
         Blade::directive('openGraph', function ($expression) {
             $expression = trim($expression, '\"\'');
@@ -121,10 +121,10 @@ class SeoManagerServiceProvider extends ServiceProvider
             $metaOpenGraph = metaOpenGraph($expression);
             if (is_array($metaOpenGraph)) {
                 foreach ($metaOpenGraph as $key => $og) {
-                    $meta .= "<meta property='{$key}' content='{$og}'/>";
+                    $meta .= "<meta property='{$key}' content='{$og}'/>\n";
                 }
             } else {
-                $meta .= "<meta property='{$expression}' content='{$metaOpenGraph}'/>";
+                $meta .= "<meta property='{$expression}' content='{$metaOpenGraph}'/>\n";
             }
             return $meta;
         });
